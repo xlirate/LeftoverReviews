@@ -1,7 +1,7 @@
-package hello;
+package com.controller;
 
-import entities.Product;
-import entities.ProductRepository;
+import com.entities.Product;
+import com.entities.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ public class GreetingController {
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         productRepository.save(new Product());
 
-        model.addAttribute("id", productRepository.findAll().iterator().next());
+        model.addAttribute("id", productRepository.findAll().iterator().next().id);
 
         return "greeting";
     }
