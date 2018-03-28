@@ -2,5 +2,5 @@ package com.entities;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface ProductRepository extends CrudRepository<Product, Integer> {
+public interface ProductRepository extends CrudRepository<Product, Long> {
 }
