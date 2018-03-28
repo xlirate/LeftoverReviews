@@ -5,6 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:text="'The user ID is: ' + ${user.userID}" />
+	<form action="#" th:action="@{/user}" th:object="${user}" method="post">
+		<p>UserID: <input type="text" th:field="*{userID}" /> </p>
+		<p>Username: <input type="text" th:field="*{username}" /> </p>
+		<p><input type="submit" value="Submit" /></p>
+	</form>
 </body>
 </html>
