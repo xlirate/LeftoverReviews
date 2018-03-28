@@ -36,8 +36,9 @@ public class ReviewSystemController {
     @GetMapping("/user")
     public String userDisplay(Model model)
     {
-    	userRepo.save(new User());
-    	model.addAttribute("user", userRepo.findAll().iterator().next().getUserID());
+    	User user = new User();
+    	userRepo.save(user);
+    	model.addAttribute("user", userRepo.findById(user.getUserID()).get());
     	return "user";
     }
 
