@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Result</h1>
+    <p th:text="'UserID: ' + ${user.userID}" />
+    <p th:text="'Username: ' + ${user.username}" />
+    <a href="/user">Enter another user</a>    
+    <a href="/allusers">See list of current users</a>
+</body>
+</html>

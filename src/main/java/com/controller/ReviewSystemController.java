@@ -39,15 +39,22 @@ public class ReviewSystemController {
     public String userDisplay(Model model)
     {
     	User user = new User();
-    	userRepo.save(user);
-    	model.addAttribute("user", userRepo.findById(user.getUserID()).get());
+    	model.addAttribute("user", user);
     	return "user";
     }
     
     @PostMapping("/user")
     public String userSubmit(@ModelAttribute User user)
     {
+    	userRepo.save(user);
     	return "result";
+    }
+    
+    @GetMapping("/allusers")
+    public String allUserDisplay(Model model)
+    {
+    	model.addAttribute("allusers", userRepo.findAll());
+    	return "allusers";
     }
 
 }
