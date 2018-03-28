@@ -1,12 +1,11 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+	<h1>Enter in the username for the new user you would like to create</h1>
 	<form action="#" th:action="@{/user}" th:object="${user}" method="post">
-		<p>UserID: <input type="text" th:field="*{userID}" /> </p>
 		<p>Username: <input type="text" th:field="*{username}" /> </p>
 		<p><input type="submit" value="Submit" /></p>
 	</form>

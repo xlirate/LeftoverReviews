@@ -25,6 +25,11 @@ public class ReviewSystemController {
         this.productRepository = productRepository;
         this.userRepo = userRepo;
     }
+    
+    @GetMapping("/")
+    public String homeDisplay() {
+        return "home";
+    }
 
     @GetMapping("/product")
     public String productDisplay(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
