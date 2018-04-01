@@ -33,7 +33,7 @@ public class ReviewSystemController {
 
     @GetMapping("/product")
     public String productDisplay(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        productRepository.save(new Product());
+        productRepository.save(new Product(new User("Tom"), "google.com"));
 
         model.addAttribute("id", productRepository.findAll().iterator().next().getId());
 
@@ -43,7 +43,7 @@ public class ReviewSystemController {
     @GetMapping("/user")
     public String userDisplay(Model model)
     {
-    	User user = new User();
+    	User user = new User("Tom");
     	model.addAttribute("user", user);
     	return "user";
     }

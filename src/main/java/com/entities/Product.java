@@ -3,6 +3,7 @@ package com.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -16,9 +17,10 @@ public class Product {
     private String url;
 
     @NotNull
+    @ManyToOne
     private User creator;
 
-    //can be null, replace null with something like "No description given"
+    @NotNull
     private String description;
 
     private Product(){}
@@ -32,7 +34,7 @@ public class Product {
 
     public Product(User creator, String url)
     {
-        this(creator, url, null);
+        this(creator, url, "No description given");
     }
 
 	public Long getId() {
