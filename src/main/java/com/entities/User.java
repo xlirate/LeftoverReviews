@@ -1,35 +1,37 @@
 package com.entities;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class User {
 	
     @Id
     @GeneratedValue
-	public Long userID;
+	private Long userID;
+
+    @NotNull
 	public String username;
 
-	
-	public User(Long userID, String username)
+    private Set<Product> createdProducts;
+
+    private User(){}
+
+	public User(String username)
 	{
-		this.userID = userID;
 		this.username = username;
 	}
-	
-	public User()
-	{
-		
-	}
-	
+
 	public Long getUserID() {
 		return userID;
 	}
-	public void setUserID(Long userID) {
+	private void setUserID(Long userID) {
 		this.userID = userID;
 	}
 	public String getUsername() {

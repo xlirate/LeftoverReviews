@@ -3,6 +3,7 @@ package com.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Product {
@@ -10,24 +11,35 @@ public class Product {
     @Id
     @GeneratedValue
     private Long id;
+
+    @NotNull
     private String url;
-    
-    public Product()
+
+    @NotNull
+    private User creator;
+
+    //can be null, replace null with something like "No description given"
+    private String description;
+
+    private Product(){}
+
+    public Product(User creator, String url, String description)
     {
-    	
+        this.description = description;
+        this.creator = creator;
+        this.url = url;
     }
-    
-    public Product(Long id, String url)
+
+    public Product(User creator, String url)
     {
-    	this.id = id;
-    	this.url = url;
+        this(creator, url, null);
     }
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	private void setId(Long id) {
 		this.id = id;
 	}
 
