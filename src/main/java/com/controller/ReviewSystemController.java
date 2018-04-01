@@ -33,7 +33,7 @@ public class ReviewSystemController {
 
     @GetMapping("/product")
     public String productDisplay(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        productRepository.save(new Product(new User("Tom"), "google.com"));
+        productRepository.save(new User("Tom").createProduct("google.com", "Some description"));
 
         model.addAttribute("id", productRepository.findAll().iterator().next().getId());
 
