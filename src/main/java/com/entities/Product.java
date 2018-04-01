@@ -1,7 +1,5 @@
 package com.entities;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
@@ -10,11 +8,6 @@ import java.util.Set;
 
 @Entity
 public class Product {
-
-    @Autowired
-    @Transient
-    private static ProductRepository repo;
-    public static ProductRepository getRepo(){return repo;}
 
     @Id
     @GeneratedValue
@@ -40,19 +33,11 @@ public class Product {
         this.description = description;
         this.creator = creator;
         this.url = url;
-
-        if(this.id == null) {
-            this.id = repo.save(this).id;
-        }
     }
 
     public Long getId() {
-		return id;
-	}
-
-	private void setId(Long id) {
-		this.id = id;
-	}
+        return id;
+    }
 
 	public String getUrl() {
 		return url;
@@ -66,19 +51,34 @@ public class Product {
         return Collections.unmodifiableSet(this.reviews);
     }
 
+    public ProductRepository getRepo(){
+        return RepoManager.getProductRepository();
+    }
+
+    public Product save(){
+        return this.getRepo().save(this);
+    }
+
     @Override
     public boolean equals(Object o){
         if(o == null || !(o instanceof Product)){
             return false;
         }else{
-            return this.id.equals(((Product)o).id);
+            return this.getId().equals(((Product)o).getId());
         }
     }
 
     @Override
     public int hashCode(){
-        return this.id.intValue();
+        return this.getId().intValue();
     }
 
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public User getCreator() {
+        return this.creator;
+    }
 }

@@ -1,6 +1,6 @@
 package com.entities;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.PropertyValues;
 
 import java.util.*;
 
@@ -9,11 +9,6 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class User {
-
-    @Autowired
-    @Transient
-    private static UserRepository repo;
-	public static UserRepository getRepo(){return repo;}
 
     @Id
     @GeneratedValue
@@ -33,22 +28,31 @@ public class User {
 
     private User(){}
 
+
+    /**
+     * correct usage is
+     *
+     * new User("name").save();
+     */
     public User(String username){
 		this.username = username;
-
-        if(this.id == null) {
-            this.id = repo.save(this).id;
-        }
 	}
 
     public Review writeReview(Product product, String description, Double score){
-        Review r = new Review(product, this, description, score);
+        for(Review old : this.writenReviews){
+            if(old.getProduct().equals(product)){
+                old.update(description, score);
+                return old;
+            }
+        }
+        Review r = new Review(product, this, description, score).save();
+        product.addReview(r);
         this.writenReviews.add(r);
         return r;
     }
 
     public Product createProduct(String url, String description){
-        Product product = new Product(this, url, description);
+        Product product = new Product(this, url, description).save();
         this.createdProducts.add(product);
         return product;
     }
@@ -144,17 +148,37 @@ public class User {
 		return username;
 	}
 
+	public UserRepository getRepo(){
+        return RepoManager.getUserRepository();
+    }
+
     @Override
     public boolean equals(Object o){
         if(o == null || !(o instanceof User)){
             return false;
         }else{
-            return this.id.equals(((User)o).id);
+            return this.getId().equals(((User)o).getId());
         }
+    }
+
+    public User save(){
+        return this.getRepo().save(this);
     }
 
     @Override
     public int hashCode(){
-        return this.id.intValue();
+        return this.getId().intValue();
+    }
+
+    public Set<Review> getWritenReviews() {
+        return Collections.unmodifiableSet(this.writenReviews);
+    }
+
+    public Set<Product> getCreatedProducts() {
+        return Collections.unmodifiableSet(this.createdProducts);
+    }
+
+    public Set<User> getFollowedUsers() {
+        return Collections.unmodifiableSet(this.followedUsers);
     }
 }

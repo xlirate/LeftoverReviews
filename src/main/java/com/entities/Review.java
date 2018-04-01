@@ -1,17 +1,10 @@
 package com.entities;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Review {
-
-    @Autowired
-    @Transient
-    private static ReviewRepository repo;
-    public static ReviewRepository getRepo(){return repo;}
 
     @Id
     @GeneratedValue
@@ -39,11 +32,6 @@ public class Review {
         this.description = description;
         this.score = score;
 
-        product.addReview(this);
-
-        if(this.id == null) {
-            this.id = repo.save(this).id;
-        }
     }
 
     public Product getProduct(){
@@ -62,17 +50,35 @@ public class Review {
         return this.score;
     }
 
+    public ReviewRepository getRepo(){
+        return RepoManager.getReviewRepository();
+    }
+
     @Override
     public boolean equals(Object o){
         if(o == null || !(o instanceof Review)){
             return false;
         }else{
-            return this.id.equals(((Review)o).id);
+            return this.getId().equals(((Review)o).getId());
         }
+    }
+
+    public Review save(){
+        return this.getRepo().save(this);
     }
 
     @Override
     public int hashCode(){
-        return this.id.intValue();
+        return this.getId().intValue();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void update(String description, Double score) {
+        this.description = description;
+        this.score = score;
+        this.getRepo().save(this);
     }
 }
