@@ -45,14 +45,20 @@ public class User {
                 return old;
             }
         }
-        Review r = new Review(product, this, description, score).save();
+        Review r = new Review(product, this, description, score);
+        if(this.id != null){
+            r = r.save();
+        }
         product.addReview(r);
         this.writenReviews.add(r);
         return r;
     }
 
     public Product createProduct(String url, String description){
-        Product product = new Product(this, url, description).save();
+        Product product = new Product(this, url, description);
+        if(this.id != null){
+            product = product.save();
+        }
         this.createdProducts.add(product);
         return product;
     }
