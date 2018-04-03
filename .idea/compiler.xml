@@ -9,5 +9,8 @@
         <module name="LeftoverReviews" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="LeftoverReviews" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
