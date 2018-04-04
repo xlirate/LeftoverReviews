@@ -26,11 +26,17 @@ public class ReviewSystemController {
         this.userRepo = userRepo;
     }
     
-    @GetMapping("/")
+    @GetMapping("/home")
     public String homeDisplay() {
         return "home";
     }
-
+    
+    @GetMapping("/")
+    public String defaultDisplay() {
+        return "home";
+    }
+    
+    
     @GetMapping("/product")
     public String productDisplay(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         new User("Tom").createProduct("google.com", "Some description");
@@ -43,7 +49,7 @@ public class ReviewSystemController {
     @GetMapping("/user")
     public String userDisplay(Model model)
     {
-    	User user = new User("Tom");
+    	User user = new User("");
     	model.addAttribute("user", user);
     	return "user";
     }
@@ -60,6 +66,15 @@ public class ReviewSystemController {
     {
     	model.addAttribute("allusers", userRepo.findAll());
     	return "allusers";
+    }
+    
+    @GetMapping("/follow")
+    public String followUser(Model model)
+    {
+    	
+    	
+    	
+    	return "follow";
     }
 
 }
