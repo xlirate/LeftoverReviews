@@ -26,7 +26,7 @@ public class ReviewSystemController {
         this.userRepo = userRepo;
     }
     
-    @GetMapping("/")
+    @GetMapping("/home")
     public String homeDisplay() {
         return "home";
     }
@@ -60,6 +60,15 @@ public class ReviewSystemController {
     {
     	model.addAttribute("allusers", userRepo.findAll());
     	return "allusers";
+    }
+    
+    @GetMapping("/follow")
+    public String followUser(Model model)
+    {
+    	
+    	
+    	
+    	return "follow";
     }
 
 }
