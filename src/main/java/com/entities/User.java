@@ -14,7 +14,9 @@ public class User {
     @GeneratedValue
 	private Long id;
 
+
     @NotNull
+    @Column(unique=true)
 	private String username;
 
     @OneToMany
@@ -164,6 +166,14 @@ public class User {
             return false;
         }else{
             return this.getId().equals(((User)o).getId());
+        }
+    }
+
+    public boolean hasUniqueName(){
+        if(this.id == null) {
+            return this.getRepo().findByUsername(this.username) == null;
+        }else{
+            return true;
         }
     }
 

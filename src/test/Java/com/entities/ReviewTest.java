@@ -1,5 +1,7 @@
 package com.entities;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,14 @@ public class ReviewTest {
     @Autowired
     private RepoManager manager;//this MUST be wired created somewhere for the entity classes to work.
 
+    @Before
+    public void clearDb(){
+        RepoManager.clearAll();
+    }
+
     @Test
     public void overridingOldReviewsWithNewOnes(){
-        User josh = new User("josh").save();
+        User josh = new User("Josh").save();
         Product timms = josh.createProduct("timhortons.ca", "coffee");
         Review r = josh.writeReview(timms, "hot", 1d);
 
