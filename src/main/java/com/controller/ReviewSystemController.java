@@ -30,7 +30,13 @@ public class ReviewSystemController {
     public String homeDisplay() {
         return "home";
     }
-
+    
+    @GetMapping("/")
+    public String defaultDisplay() {
+        return "home";
+    }
+    
+    
     @GetMapping("/product")
     public String productDisplay(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         new User("Tom").createProduct("google.com", "Some description");
