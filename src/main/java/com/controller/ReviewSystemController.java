@@ -43,7 +43,7 @@ public class ReviewSystemController {
     @GetMapping("/user")
     public String userDisplay(Model model)
     {
-    	User user = new User("Tom");
+    	User user = new User("");
     	model.addAttribute("user", user);
     	return "user";
     }
