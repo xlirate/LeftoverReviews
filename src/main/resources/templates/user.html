@@ -19,7 +19,7 @@
         <div>
             <a th:href="@{'/products/' + ${review.product.id}}" th:text="${review.product.name}"></a>
             <p th:text="${review.description}"></p>
-            <p th:text="'Score: '${review.score}"></p>
+            <p th:text="'Score: ' + ${review.score}"></p>
             <form method="DELETE" th:if="${review.writer.id.equals(currentuser.id)}" th:action="@{'/users/' + ${user.id}}">
                 <button type="submit" value="Submit">Delete</button>
             </form>
