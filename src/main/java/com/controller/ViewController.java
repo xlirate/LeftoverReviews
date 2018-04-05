@@ -23,21 +23,4 @@ public class ViewController {
     public String homeRedirectDisplay(Model model) {
         return "redirect:/";
     }
-
-    /*
-
-    @GetMapping("/accounts")
-    public String accountsDisplay(Model model) {
-        return "usersList";
-    }
-
-    @PostMapping("/register/{username}")
-    public String registerPost(Model model) {
-        return "usersList";
-    }
-
-    @PostMapping("/login/{username}")
-    public String loginPost(Model model) {
-        return "usersList";
-    }*/
 }
