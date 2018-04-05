@@ -1,5 +1,7 @@
 package com.entities;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +18,22 @@ import static org.junit.Assert.*;
 public class UserTest {
 
     @Autowired
-    private RepoManager manager;//this MUST be wired created somewhere for the entity classes to work.
+    private RepoManager manager;//this MUST be wired somewhere for the entity classes to work.
+
+    @Before
+    public void clearDb(){
+        RepoManager.clearAll();
+    }
 
     @Test
     public void createProduct() {
-        User alice = new User("Alice").save();
-        Product apple = alice.createProduct("apple.com", "Makes phones");
+        User jill = new User("Jill").save();
+        Product apple = jill.createProduct("apple.com", "Makes phones");
 
         assertTrue(apple.getUrl().equals("apple.com"));
         assertTrue(apple.getDescription().equals("Makes phones"));
-        assertTrue(alice.getCreatedProducts().contains(apple));
-        assertTrue(apple.getCreator().equals(alice));
+        assertTrue(jill.getCreatedProducts().contains(apple));
+        assertTrue(apple.getCreator().equals(jill));
     }
 
     @Test
@@ -63,9 +70,9 @@ public class UserTest {
     @Test
     public void jaccardDistance() {
         User john = new User("John").save();
-        User alice = new User("Alice").save();
-        User bob = new User("Bob").save();
-        User eve = new User("Eve").save();
+        User alice = new User("Alice2").save();
+        User bob = new User("Bob2").save();
+        User eve = new User("Eve2").save();
 
         Product a = john.createProduct("a.com", "aaa");
         Product b = john.createProduct("b.com", "bbb");
@@ -114,6 +121,29 @@ public class UserTest {
         assertTrue(users.get(0).baconDistance(users.get(6)) == 6);
         assertTrue(users.get(0).baconDistance(users.get(7)) == null);//null because 7 is greater than 6, id bacon distance caps out at 6 to limit computation time
         assertTrue(users.get(3).baconDistance(users.get(0)) == null);//there is no way to navigate from 3 to 0, so their distance is undefined
+    }
+
+    @Test
+    public void usernameUniquenesCallCheck(){
+        User jared = new User("Jared").save();
+        User jared2 = new User("Jared");
+        User curtis = new User("Curtis");
+
+        assertTrue(curtis.hasUniqueName());
+        assertFalse(jared2.hasUniqueName());
+    }
+
+    @Test
+    public void usernameUniquenesExcetion(){
+        User jared = new User("Jared").save();
+
+        try {
+            new User("Jared").save();
+        }catch(Exception e){
+            return;
+        }
+
+        fail();
     }
 
     @Test
