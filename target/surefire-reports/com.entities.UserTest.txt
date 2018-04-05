@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+Test set: com.entities.UserTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.412 s <<< FAILURE! - in com.entities.UserTest
+jaccardDistance(com.entities.UserTest)  Time elapsed: 0.172 s  <<< ERROR!
+org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.UserTest.jaccardDistance(UserTest.java:70)
+Caused by: javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.UserTest.jaccardDistance(UserTest.java:70)
+Caused by: javax.validation.ConstraintViolationException: 
+Validation failed for classes [com.entities.Product] during persist time for groups [javax.validation.groups.Default, ]
+List of constraint violations:[
+	ConstraintViolationImpl{interpolatedMessage='must not be null', propertyPath=productName, rootBeanClass=class com.entities.Product, messageTemplate='{javax.validation.constraints.NotNull.message}'}
+]
+	at com.entities.UserTest.jaccardDistance(UserTest.java:70)
+
+writeReview(com.entities.UserTest)  Time elapsed: 0.013 s  <<< ERROR!
+org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.UserTest.writeReview(UserTest.java:35)
+Caused by: javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.UserTest.writeReview(UserTest.java:35)
+Caused by: javax.validation.ConstraintViolationException: 
+Validation failed for classes [com.entities.Product] during persist time for groups [javax.validation.groups.Default, ]
+List of constraint violations:[
+	ConstraintViolationImpl{interpolatedMessage='must not be null', propertyPath=productName, rootBeanClass=class com.entities.Product, messageTemplate='{javax.validation.constraints.NotNull.message}'}
+]
+	at com.entities.UserTest.writeReview(UserTest.java:35)
+
+createProduct(com.entities.UserTest)  Time elapsed: 0.014 s  <<< ERROR!
+org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.UserTest.createProduct(UserTest.java:24)
+Caused by: javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.UserTest.createProduct(UserTest.java:24)
+Caused by: javax.validation.ConstraintViolationException: 
+Validation failed for classes [com.entities.Product] during persist time for groups [javax.validation.groups.Default, ]
+List of constraint violations:[
+	ConstraintViolationImpl{interpolatedMessage='must not be null', propertyPath=productName, rootBeanClass=class com.entities.Product, messageTemplate='{javax.validation.constraints.NotNull.message}'}
+]
+	at com.entities.UserTest.createProduct(UserTest.java:24)
+

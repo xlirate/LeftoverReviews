@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+Test set: com.entities.ReviewTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.083 s <<< FAILURE! - in com.entities.ReviewTest
+equalsNotFalsePositive(com.entities.ReviewTest)  Time elapsed: 0.015 s  <<< ERROR!
+org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.ReviewTest.equalsNotFalsePositive(ReviewTest.java:36)
+Caused by: javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.ReviewTest.equalsNotFalsePositive(ReviewTest.java:36)
+Caused by: javax.validation.ConstraintViolationException: 
+Validation failed for classes [com.entities.Product] during persist time for groups [javax.validation.groups.Default, ]
+List of constraint violations:[
+	ConstraintViolationImpl{interpolatedMessage='must not be null', propertyPath=productName, rootBeanClass=class com.entities.Product, messageTemplate='{javax.validation.constraints.NotNull.message}'}
+]
+	at com.entities.ReviewTest.equalsNotFalsePositive(ReviewTest.java:36)
+
+equalsNotFalseNegative(com.entities.ReviewTest)  Time elapsed: 0.012 s  <<< ERROR!
+org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.ReviewTest.equalsNotFalseNegative(ReviewTest.java:48)
+Caused by: javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.ReviewTest.equalsNotFalseNegative(ReviewTest.java:48)
+Caused by: javax.validation.ConstraintViolationException: 
+Validation failed for classes [com.entities.Product] during persist time for groups [javax.validation.groups.Default, ]
+List of constraint violations:[
+	ConstraintViolationImpl{interpolatedMessage='must not be null', propertyPath=productName, rootBeanClass=class com.entities.Product, messageTemplate='{javax.validation.constraints.NotNull.message}'}
+]
+	at com.entities.ReviewTest.equalsNotFalseNegative(ReviewTest.java:48)
+
+overridingOldReviewsWithNewOnes(com.entities.ReviewTest)  Time elapsed: 0.013 s  <<< ERROR!
+org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.ReviewTest.overridingOldReviewsWithNewOnes(ReviewTest.java:21)
+Caused by: javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.ReviewTest.overridingOldReviewsWithNewOnes(ReviewTest.java:21)
+Caused by: javax.validation.ConstraintViolationException: 
+Validation failed for classes [com.entities.Product] during persist time for groups [javax.validation.groups.Default, ]
+List of constraint violations:[
+	ConstraintViolationImpl{interpolatedMessage='must not be null', propertyPath=productName, rootBeanClass=class com.entities.Product, messageTemplate='{javax.validation.constraints.NotNull.message}'}
+]
+	at com.entities.ReviewTest.overridingOldReviewsWithNewOnes(ReviewTest.java:21)
+

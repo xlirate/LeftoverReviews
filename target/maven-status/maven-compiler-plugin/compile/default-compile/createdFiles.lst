@@ -1,0 +1,10 @@
+com/Application.class
+com/entities/User.class
+com/entities/Review.class
+com/entities/User$1.class
+com/entities/ReviewRepository.class
+com/entities/Product.class
+com/entities/RepoManager.class
+com/controller/ReviewSystemController.class
+com/entities/ProductRepository.class
+com/entities/UserRepository.class

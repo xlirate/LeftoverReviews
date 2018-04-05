@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: com.entities.ProductTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 41.387 s <<< FAILURE! - in com.entities.ProductTest
+equalsNotFalsePositive(com.entities.ProductTest)  Time elapsed: 1.639 s  <<< ERROR!
+org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.ProductTest.equalsNotFalsePositive(ProductTest.java:22)
+Caused by: javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.ProductTest.equalsNotFalsePositive(ProductTest.java:22)
+Caused by: javax.validation.ConstraintViolationException: 
+Validation failed for classes [com.entities.Product] during persist time for groups [javax.validation.groups.Default, ]
+List of constraint violations:[
+	ConstraintViolationImpl{interpolatedMessage='must not be null', propertyPath=productName, rootBeanClass=class com.entities.Product, messageTemplate='{javax.validation.constraints.NotNull.message}'}
+]
+	at com.entities.ProductTest.equalsNotFalsePositive(ProductTest.java:22)
+
+equalsNotFalseNegative(com.entities.ProductTest)  Time elapsed: 0.014 s  <<< ERROR!
+org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.ProductTest.equalsNotFalseNegative(ProductTest.java:31)
+Caused by: javax.persistence.RollbackException: Error while committing the transaction
+	at com.entities.ProductTest.equalsNotFalseNegative(ProductTest.java:31)
+Caused by: javax.validation.ConstraintViolationException: 
+Validation failed for classes [com.entities.Product] during persist time for groups [javax.validation.groups.Default, ]
+List of constraint violations:[
+	ConstraintViolationImpl{interpolatedMessage='must not be null', propertyPath=productName, rootBeanClass=class com.entities.Product, messageTemplate='{javax.validation.constraints.NotNull.message}'}
+]
+	at com.entities.ProductTest.equalsNotFalseNegative(ProductTest.java:31)
+
