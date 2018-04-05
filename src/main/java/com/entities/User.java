@@ -143,7 +143,7 @@ public class User {
                 return i;
             }
         }
-        return null;
+        return MAX_BACON_DEPTH+1;
     }
 
     public void follow(User other){
