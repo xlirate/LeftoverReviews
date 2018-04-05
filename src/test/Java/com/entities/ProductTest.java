@@ -26,8 +26,8 @@ public class ProductTest {
     @Test
     public void equalsNotFalsePositive() {
         User tom = new User("Tom").save();
-        Product google = tom.createProduct("google.com", "A search tool");
-        Product carleton = tom.createProduct("carleton.ca", "A school");
+        Product google = tom.createProduct("Google","google.com", "A search tool");
+        Product carleton = tom.createProduct("Carleton","carleton.ca", "A school");
 
         assertFalse(google.equals(carleton));
     }
@@ -35,7 +35,7 @@ public class ProductTest {
     @Test
     public void equalsNotFalseNegative() {
         User jill = new User("Jill").save();
-        Product original = jill.createProduct("youtube.com", "video site");
+        Product original = jill.createProduct("Youtube","youtube.com", "video site");
         Product copy = original.getRepo().findById(original.getId()).orElse(null);
 
         assertTrue(original.equals(copy));

@@ -10,7 +10,7 @@ public class UsersController {
 
     //GET "/users?[usernamefrag={frag}]&[ordering={jaccard|bacon}]"
     @GetMapping("/users")
-    public String getUsersList(@CookieValue("clientUserId") String clientUserId, Model model) {
+    public String getUsersList(@CookieValue(name = "clientUserId", required = false) String clientUserId, Model model) {
         long id = 0;
         if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
             return "redirect:/account";

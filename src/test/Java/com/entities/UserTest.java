@@ -28,7 +28,7 @@ public class UserTest {
     @Test
     public void createProduct() {
         User jill = new User("Jill").save();
-        Product apple = jill.createProduct("apple.com", "Makes phones");
+        Product apple = jill.createProduct("Apple","apple.com", "Makes phones");
 
         assertTrue(apple.getUrl().equals("apple.com"));
         assertTrue(apple.getDescription().equals("Makes phones"));
@@ -39,7 +39,7 @@ public class UserTest {
     @Test
     public void writeReview() {
         User tom = new User("Tom").save();
-        Product google = tom.createProduct("google.com", "a dns provider");
+        Product google = tom.createProduct("Google","google.com", "a dns provider");
         Review r = tom.writeReview(google, "ehh..", 1d/2d);
 
         assertTrue(r.getProduct().equals(google));
@@ -74,10 +74,10 @@ public class UserTest {
         User bob = new User("Bob2").save();
         User eve = new User("Eve2").save();
 
-        Product a = john.createProduct("a.com", "aaa");
-        Product b = john.createProduct("b.com", "bbb");
-        Product c = john.createProduct("c.com", "ccc");
-        Product d = john.createProduct("d.com", "ddd");
+        Product a = john.createProduct("a","a.com", "aaa");
+        Product b = john.createProduct("b","b.com", "bbb");
+        Product c = john.createProduct("c","c.com", "ccc");
+        Product d = john.createProduct("d","d.com", "ddd");
 
         alice.writeReview(b, "a", 1d/5d);
         alice.writeReview(c, "a", 1d/5d);
