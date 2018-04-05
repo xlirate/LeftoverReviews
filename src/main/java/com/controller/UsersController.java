@@ -35,7 +35,7 @@ public class UsersController {
         User curentUser = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
 
         List<User> allUsers = new ArrayList<>();
-        for (User u : userRepo.findAll()) {
+        for (User u : RepoManager.getUserRepository().findAll()) {
             allUsers.add(u);
         }
 
