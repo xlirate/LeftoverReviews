@@ -147,19 +147,42 @@ public class UsersController {
      
     }
 
-    // DELETE "/users/follow/{userid}"
-//    @DeleteMapping("/users/follow/{userid}")
-//    public String unfollow(@PathVariable(value="userid") String userID, @CookieValue("clientUserId") String clientUserId, Model model){
-//        long id = 0;
-//        long otherid = 0;
-//        if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
-//            return "redirect:/account";
-//        }else{
-//            id = Long.valueOf(clientUserId);
-//        }
-//        otherid = Long.valueOf(userID);
-//        User user = userRepo.findById(id).get();
-//        user.unfollow(user);
-//        return "unfollow";
-//    }
+
+    @GetMapping("/unfollow")
+    public String unfollowUser(@CookieValue("clientUserId") String clientUserId, Model model)
+    {
+    	  long id = 0;
+          long otherid = 0;
+          if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
+              return "redirect:/account";
+          }else{
+              id = Long.valueOf(clientUserId);
+          }
+          User user = new User("");
+          model.addAttribute("user", user);
+          return "unfollow";
+	}
+    
+    @PostMapping("/unfollow")
+    public String showUnfollow(@CookieValue("clientUserId") String clientUserId, @ModelAttribute User user, Model model)
+    {
+  	  long id = 0;
+      long otherid = 0;
+      if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
+          return "redirect:/account";
+      }else{
+          id = Long.valueOf(clientUserId);
+      }
+      User unfollowUser = userRepo.findByUsername(user.getUsername());
+      User currentUser = userRepo.findById(id).get();
+      if(unfollowUser != null)
+      {
+    	  currentUser.unfollow(unfollowUser);
+          return "unfollowresult";
+      }
+      else
+      {
+    	  return "finderror";
+      }
+    }
 }
