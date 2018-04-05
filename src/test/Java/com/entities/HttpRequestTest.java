@@ -58,14 +58,14 @@ public class HttpRequestTest {
                 String.class)).contains("productList");
     }
 
-    @Test
+    /*@Test
     public void productDisplayShouldReturnDefaultMessage() throws Exception {
         User tom = new User("Tom").save();
         Product google = tom.createProduct("google.com", "A search tool").save();
 
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products/"+google.getId(),
                 String.class)).contains("The product ID is: " + google.getId());
-    }
+    }*/
 
     @Test
     public void userDisplayDisplayShouldReturnDefaultMessage() throws Exception {

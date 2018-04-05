@@ -1,0 +1,22 @@
+-------------------------------------------------------------------------------
+Test set: com.entities.HttpRequestTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 16.145 s <<< FAILURE! - in com.entities.HttpRequestTest
+productDisplayShouldReturnDefaultMessage(com.entities.HttpRequestTest)  Time elapsed: 0.584 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting:
+ <"<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p >The product ID is: null</p>
+</body>
+</html>">
+to contain:
+ <"The product ID is: 2"> 
+	at com.entities.HttpRequestTest.productDisplayShouldReturnDefaultMessage(HttpRequestTest.java:67)
+
