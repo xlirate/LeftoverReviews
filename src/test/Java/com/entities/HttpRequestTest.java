@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
-
+import java.io.File;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -25,13 +25,13 @@ public class HttpRequestTest {
     @Test
     public void homeDisplayShouldReturnDefaultMessage() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/home",
-                String.class)).contains("home");
+                String.class)).contains("Product Review System");
     }
 
     @Test
     public void defaultDisplayShouldReturnDefaultMessage() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
-                String.class)).contains("home");
+                String.class)).contains("Product Review System");
     }
 
     @Test
@@ -44,5 +44,11 @@ public class HttpRequestTest {
     public void userDisplayDisplayShouldReturnDefaultMessage() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/user",
                 String.class)).contains("user");
+    }
+
+    @Test
+    public void allUserDisplayDisplayShouldReturnDefaultMessage() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/allusers",
+                String.class)).contains("allusers");
     }
 }
