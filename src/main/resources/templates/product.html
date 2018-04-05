@@ -1,10 +1,52 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Leftover Reviews</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:text="'The product ID is: ' + ${id}" />
+    <h1><a href="./index.html">Leftover Reviews</a></h1>
+    <hr>
+    <form method="POST" th:if="${product.creator.id.equals(currentuser.id)}" th:action="@{'/products/delete/' + ${product.id}}">
+        <button type="submit" value="Submit">Delete</button>
+    </form>
+    <h1 th:text="@{${product.name} + '#' + ${product.id}}">Apple</h1>
+    <p><a th:href="'/users/' + ${product.creator.id}" th:text="${product.creator.username}">Placeholder Username</a></p>
+    <p th:text="${product.description}">This is a placeholder description<p>
+    <p><a th:href="${product.url}">Product Page</a></p>
+    <br/>
+    <h2>Write a Review</h2>
+    <form method="POST" action="/products/review">
+        <p th:text="${currentuser.username}"> Placeholder current user</p>
+        <input type="hidden" name="productid" th:value="${product.id}">
+        <p><input type="text" name="description" value="" placeholder="Comment"></p>
+        <p><input type="number" name="score" placeholder="Score" step="0.1" min="0" max="1"></p>
+        <button type="submit" value="Submit">Submit Review</button>
+    </form>
+    <br/>
+    <div id="search">
+            <h2>Sort Reviews</h2>
+            <form method="GET" th:action="'/products/' + ${product.id}">
+                <select name="ordering">
+                    <option value=""></option>
+                    <option value="jaccard">Jaccard</option>
+                    <option value="bacon">Bacon</option>
+                    <option value="followed">Followed</option>
+                </select>
+                <p class="submit"><input type="submit" name="commit" value="Search"></p>
+            </form>
+        </div>
+    <br/>
+    <h2>Product Reviews</h2>
+    <ul th:each = "review: ${reviews}">
+        <li>
+            <a th:href="@{'/users/' + ${review.writer.id}}" th:text="${review.writer.username}"></a>
+            <p th:text="'Score: ' + ${review.score}"></p>
+            <p th:text="${review.description}"></p>
+            <form method="POST" th:if="${review.writer.id.equals(currentuser.id)}" th:action="@{'/products/review/delete/' + ${review.id}}">
+                <button type="submit" value="Submit">Delete</button>
+            </form>
+        </li>
+    </ul>
 </body>
 </html>

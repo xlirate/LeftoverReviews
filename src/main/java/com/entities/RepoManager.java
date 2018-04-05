@@ -28,15 +28,6 @@ public class RepoManager{
         }
     }
 
-    /**
-     * This is meant for testing use only!!!
-     * This deletes everything in the entire DB!!
-     */
-    public static void clearAll(){
-        reviewRepo.deleteAll();
-        productRepo.deleteAll();
-        userRepo.deleteAll();
-    }
     public static UserRepository getUserRepository(){
         return userRepo;
     }

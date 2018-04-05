@@ -1,7 +1,5 @@
 package com.entities;
 
-import org.springframework.beans.PropertyValues;
-
 import java.util.*;
 
 import javax.persistence.*;
@@ -41,23 +39,27 @@ public class User {
 	}
 
     public Review writeReview(Product product, String description, Double score){
-        for(Review old : this.writenReviews){
-            if(old.getProduct().equals(product)){
-                old.update(description, score);
-                return old;
+
+        for(Review r : this.getWritenReviews()){
+            if(r.getProduct().equals(product)){
+                return r.update(description,score);
             }
         }
+
         Review r = new Review(product, this, description, score);
         if(this.id != null){
             r = r.save();
         }
         product.addReview(r);
         this.writenReviews.add(r);
+        if(this.id != null){
+            product.save();
+        }
         return r;
     }
 
-    public Product createProduct(String url, String description){
-        Product product = new Product(this, url, description);
+    public Product createProduct(String name, String url, String description){
+        Product product = new Product(this, name, url, description);
         if(this.id != null){
             product = product.save();
         }
@@ -148,6 +150,7 @@ public class User {
         followedUsers.add(other);
     }
 
+
 	public Long getId() {
 		return id;
 	}
@@ -187,14 +190,19 @@ public class User {
     }
 
     public Set<Review> getWritenReviews() {
-        return Collections.unmodifiableSet(this.writenReviews);
+        return this.writenReviews;
     }
 
     public Set<Product> getCreatedProducts() {
-        return Collections.unmodifiableSet(this.createdProducts);
+        return this.createdProducts;
     }
 
     public Set<User> getFollowedUsers() {
-        return Collections.unmodifiableSet(this.followedUsers);
+        return this.followedUsers;
     }
+
+
+	public void unfollow(User unfollowUser) {
+		this.followedUsers.remove(unfollowUser);		
+	}
 }
