@@ -24,25 +24,7 @@ public class ViewController {
         return "redirect:/";
     }
 
-    @GetMapping("/users")
-    public String usersListDisplay(Model model) {
-        return "usersList";
-    }
-
-    @GetMapping("/users/{user id}")
-    public String userDisplay(Model model) {
-        return "user";
-    }
-
-    @GetMapping("/products")
-    public String productListDisplay(Model model) {
-        return "productList";
-    }
-
-    @GetMapping("/products/{product id}")
-    public String productDisplay(Model model) {
-        return "product";
-    }
+    /*
 
     @GetMapping("/accounts")
     public String accountsDisplay(Model model) {
@@ -57,5 +39,5 @@ public class ViewController {
     @PostMapping("/login/{username}")
     public String loginPost(Model model) {
         return "usersList";
-    }
+    }*/
 }
