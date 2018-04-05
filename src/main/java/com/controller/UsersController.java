@@ -16,7 +16,7 @@ import com.entities.UserRepository;
 public class UsersController {
 
     //GET "/users?[usernamefrag={frag}]&[ordering={jaccard|bacon}]"
-    @GetMapping("/users")
+    @GetMapping("/allusers")
     public String getUsersList(Model model,
                                @CookieValue(name = "clientUserId", required = false) String clientUserId,
                                @RequestParam(name = "usernamefrag", required = false) String fragment,
