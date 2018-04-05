@@ -4,9 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Here is the information about that user:</h1>
-    <p th:text="'Username: ' + ${user.username}" />
-    <p th:text="'ID: ' + ${user.id}" />
-    <a href="/allusers">See list of current users</a>
+	<h1>Enter in the username for the user you would like to search for</h1>
+	<form action="#" th:action="@{/user}" th:object="${user}" method="post">
+		<p>Username: <input type="text" th:field="*{username}" /> </p>
+		<p><input type="submit" value="Submit" /></p>
+	</form>
 </body>
 </html>
