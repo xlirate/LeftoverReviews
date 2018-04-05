@@ -17,9 +17,6 @@ public class Product {
     private String url;
 
     @NotNull
-    private String productName;
-
-    @NotNull
     @ManyToOne
     private User creator;
 
@@ -36,10 +33,6 @@ public class Product {
         this.description = description;
         this.creator = creator;
         this.url = url;
-    }
-
-    private String getName() {
-        return productName;
     }
 
     public Long getId() {

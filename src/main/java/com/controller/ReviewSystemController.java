@@ -73,6 +73,20 @@ public class ReviewSystemController {
     	model.addAttribute("allusers", userRepo.findAll());
     	return "allusers";
     }
+
+    @GetMapping("/allproducts")
+    public String allProductDisplay(Model model)
+    {
+        model.addAttribute("allproducts", productRepository.findAll());
+        return "allproducts";
+    }
+
+    @GetMapping("/searchproducts")
+    public String searchProductDisplay(Model model)
+    {
+        model.addAttribute("searchproducts", productRepository.findByUrl());
+        return "searchproducts";
+    }
     
     @GetMapping("/follow")
     public String followUser(Model model)

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Search</title>
+</head>
+<body>
+<h2>List of All Products</h2>
+<table border="1">
+    <tr>
+        <th>Product ID</th>
+        <th>Product Description</th>
+    </tr>
+    <tr th:each = "product: ${allproducts}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.username}"></td>
+    </tr>
+</table>
+</body>
+</html>
