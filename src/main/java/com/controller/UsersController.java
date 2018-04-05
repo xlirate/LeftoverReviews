@@ -15,10 +15,10 @@ import com.entities.UserRepository;
 public class UsersController {
 		
 		
-	    private UserRepository userRepo;
+    private UserRepository userRepo;
 
-	    @Autowired
-	    public UsersController(UserRepository userRepo){
+    @Autowired
+    public UsersController(UserRepository userRepo){
 	        this.userRepo = userRepo;
 	    }
 

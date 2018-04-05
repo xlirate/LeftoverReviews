@@ -23,6 +23,24 @@ public class HttpRequestTest {
     private TestRestTemplate restTemplate;
 
     @Test
+    public void accountDisplayShouldReturnDefaultMessage() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/account",
+                String.class)).contains("account");
+    }
+
+    @Test
+    public void loginDisplayShouldReturnDefaultMessage() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/account/login",
+                String.class)).contains("account");
+    }
+
+    @Test
+    public void registerDisplayShouldReturnDefaultMessage() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/account/register",
+                String.class)).contains("account");
+    }
+
+    @Test
     public void homeDisplayShouldReturnDefaultMessage() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/home",
                 String.class)).contains("Product Review System");
@@ -35,9 +53,18 @@ public class HttpRequestTest {
     }
 
     @Test
+    public void productListDisplayShouldReturnDefaultMessage() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products",
+                String.class)).contains("productList");
+    }
+
+    @Test
     public void productDisplayShouldReturnDefaultMessage() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/product",
-                String.class)).contains("product");
+        User tom = new User("Tom").save();
+        Product google = tom.createProduct("google.com", "A search tool").save();
+
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products/{"+google.getId()+"}",
+                String.class)).contains("The product ID is: " + google.getId());
     }
 
     @Test
