@@ -7,17 +7,12 @@
 <body>
     <h1><a href="/">Leftover Reviews</a></h1>
     <hr>
-    <form method="POST" th:if="${user.id.equals(currentuser.id)}" th:action="'/users/delete/' + ${user.id}">
-        <button type="submit" value="Submit">Delete</button>
-    </form>
     <form method="POST" th:if="${(not user.id.equals(currentuser.id)) and canfollow}" th:action="'/follow/' + ${user.id}">
         <button type="submit" value="Submit">Follow</button>
     </form>
     <form method="POST" th:if="${(not user.id.equals(currentuser.id)) and (not canfollow)}" th:action="'/unfollow/' + ${user.id}">
         <button type="submit" value="Submit">Unfollow</button>
     </form>
-    <h1 th:text="${user.username} + '#' + ${user.id}">Kimbo Slice</h1>
-    <p><a th:href="'/products/?user=' + ${user.id}">Products</a></p>
     <br/>
     <h2>Product Reviews</h2>
     <div th:each = "review: ${allreviews}">
