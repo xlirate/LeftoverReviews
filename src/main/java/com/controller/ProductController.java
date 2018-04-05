@@ -19,7 +19,7 @@ public class ProductController {
     public String productListDisplay(Model model,
                                      @CookieValue(name = "clientUserId", required = false) String clientUserId,
                                      @RequestParam(name = "productnamefrag", required = false) String fragment,
-                                     @RequestParam(name = "user", required = false) String posterName,
+                                     @RequestParam(name = "creator", required = false) String posterName,
                                      @RequestParam(name = "ordering", required = false) String ordering) {
 
         if(clientUserId == null || clientUserId.equals("0") || RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).orElse(null) == null){
