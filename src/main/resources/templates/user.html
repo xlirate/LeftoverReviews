@@ -4,11 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Enter in the username for the new user you would like to create</h1>
-	<form action="#" th:action="@{/user}" th:object="${user}" method="post">
-		<p>Username: <input type="text" th:field="*{username}" /> </p>
-		<p><input type="submit" value="Submit" /></p>
-	</form>
-	<p th:text="${message}" />
+	<h1>Here is the information about that user:</h1>
+    <p th:text="'Username: ' + ${user.username}" />
+    <p th:text="'ID: ' + ${user.id}" />
+    <a href="/allusers">See list of current users</a>
 </body>
 </html>
