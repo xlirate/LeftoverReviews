@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Leftover Reviews</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h2>List of Current Users</h2>
-<table border="1">
-    <tr>
-        <th>UserID</th>
-        <th>Username</th>
-    </tr>
-    <tr th:each = "user: ${allusers}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.username}"></td>
-    </tr>
-</table>
-    <a href="/user">Enter another user</a>    
+    <h2>Search Users</h2>
+    <form method="GET" action="/users">
+        <p><input type="text" name="usernamefrag" value="" placeholder="Search"></p>
+        <select name="ordering">
+            <option value=""></option>
+            <option value="jaccard">Jaccard</option>
+            <option value="bacon">Bacon</option>
+        </select>
+        <p class="submit"><input type="submit" name="commit" value="Search"></p>
+    </form>
+
+    <h2>List of Users</h2>
+    <div th:each = "user: ${allusers}">
+        <a th:href="@{'/users/' + ${user.id}}" th:text="@{${user.username} + '#' + ${user.id}}"></a>
+    </div>
 </body>
 </html>

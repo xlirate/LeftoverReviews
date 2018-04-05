@@ -36,51 +36,7 @@ public class ReviewSystemController {
         return "home";
     }
     
-    
-    @GetMapping("/product")
-    public String productDisplay(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        new User("Tom").createProduct("google.com", "Some description");
 
-        model.addAttribute("id", productRepository.findAll().iterator().next().getId());
 
-        return "product";
-    }
-    
-    @GetMapping("/user")
-    public String userDisplay(Model model)
-    {
-    	User user = new User("");
-    	model.addAttribute("user", user);
-        //model.addAttribute("message", "");
-    	return "user";
-    }
-    
-    @PostMapping("/user")
-    public String userSubmit(Model model, @ModelAttribute User user)
-    {
-        if(user.hasUniqueName()) {
-            userRepo.save(user);
-            return "result";
-        }else{
-            model.addAttribute("message", "That name is already taken!");
-            return "user";
-        }
-    }
-    
-    @GetMapping("/allusers")
-    public String allUserDisplay(Model model)
-    {
-    	model.addAttribute("allusers", userRepo.findAll());
-    	return "allusers";
-    }
-    
-    @GetMapping("/follow")
-    public String followUser(Model model)
-    {
-    	
-    	
-    	
-    	return "follow";
-    }
 
 }

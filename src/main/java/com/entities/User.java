@@ -151,6 +151,10 @@ public class User {
         followedUsers.add(other);
     }
 
+    public void unfollow(User other){
+        followedUsers.remove(other);
+    }
+
 	public Long getId() {
 		return id;
 	}

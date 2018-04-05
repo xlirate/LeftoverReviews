@@ -1,7 +1,8 @@
 package com.controller;
 
-import java.util.Optional;
+import java.util.*;
 
+import com.entities.RepoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,40 +16,75 @@ import com.entities.UserRepository;
 public class UsersController {
 
 
-	    private UserRepository userRepo;
+    private UserRepository userRepo;
 
-	    @Autowired
-	    public UsersController(UserRepository userRepo){
+    @Autowired
+    public UsersController(UserRepository userRepo){
 	        this.userRepo = userRepo;
 	    }
 
     //GET "/users?[usernamefrag={frag}]&[ordering={jaccard|bacon}]"
-    @GetMapping("/allusers")
-    public String getUsersList(@CookieValue("clientUserId") String clientUserId, Model model) {
-        long id = 0;
-        if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
+    @GetMapping("/users")
+    public String getUsersList(Model model,
+                               @CookieValue(name = "clientUserId", required = false) String clientUserId,
+                               @RequestParam(name = "usernamefrag", required = false) String fragment,
+                               @RequestParam(name = "ordering", required = false) String ordering) {
+        if (clientUserId == null || clientUserId.equals("0") || RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).orElse(null) == null) {
             return "redirect:/account";
-        }else{
-            id = Long.valueOf(clientUserId);
         }
-    	model.addAttribute("userlist", userRepo.findAll());
+        User curentUser = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
+
+        List<User> allUsers = new ArrayList<>();
+        for (User u : userRepo.findAll()) {
+            allUsers.add(u);
+        }
+
+        Collections.shuffle(allUsers);
+
+        if (fragment != null && !"".equals(fragment)) {
+            Iterator<User> itr = allUsers.iterator();
+            while (itr.hasNext()) {
+                if (!itr.next().getUsername().toUpperCase().contains(fragment.toUpperCase())) {
+                    itr.remove();
+                }
+            }
+        }
+
+        if ("bacon".equalsIgnoreCase(ordering)) {
+            Collections.sort(allUsers, new Comparator<User>() {
+                @Override
+                public int compare(User o1, User o2) {
+                    return Integer.compare(curentUser.baconDistance(o1), curentUser.baconDistance(o2));
+                }
+            });
+        } else if ("jaccard".equalsIgnoreCase(ordering)){
+            Collections.sort(allUsers, new Comparator<User>() {
+                @Override
+                public int compare(User o1, User o2) {
+                    return Double.compare(curentUser.jaccardDistance(o1), curentUser.jaccardDistance(o2));
+                }
+            });
+        }
+
+        model.addAttribute("currentuser", curentUser);
+    	model.addAttribute("allusers", allUsers);
         return "allusers";
     }
 
 
-    @GetMapping("/user")
-    public String getUser(@CookieValue("clientUserId") String clientUserId, Model model)
-    {
-    	  long id = 0;
-          long otherid = 0;
-          if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
-              return "redirect:/account";
-          }else{
-              id = Long.valueOf(clientUserId);
-          }
-          User user = new User("");
-          model.addAttribute("user", user);
-          return "user";
+    @GetMapping("/users/{userid}")
+    public String getUser(Model model,
+                          @CookieValue(name = "clientUserId", required = false) String clientUserId,
+                          @RequestParam(name = "userid", required = false) Long userid) {
+        if (clientUserId == null || clientUserId.equals("0") || RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).orElse(null) == null) {
+            return "redirect:/account";
+        }
+        User curentUser = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
+        User user = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
+        model.addAttribute("currentuser", curentUser);
+        model.addAttribute("user", user);
+
+        return "user";
 	}
 
     @PostMapping("/user")

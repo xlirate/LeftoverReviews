@@ -31,7 +31,7 @@ public class ProductController {
         for(Product p : RepoManager.getProductRepository().findAll()){
             allProducts.add(p);
         }
-        if(fragment != null){
+        if(fragment != null && !"".equals(fragment)){
             Iterator<Product> ittr = allProducts.iterator();
             Product p = null;
             while(ittr.hasNext()){
