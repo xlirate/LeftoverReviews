@@ -66,21 +66,25 @@ public class UsersController {
 //    }
 
     // POST "/users/follow/{userid}" # user id will be found in request body
-//    @PostMapping("/users/follow/{userid}")
-//    public String follow(@PathVariable(value="userid") String userID, @CookieValue("clientUserId") String clientUserId, Model model){
-//        long id = 0;
-//        long otherid = 0;
-//        if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
-//            return "redirect:/account";
-//        }else{
-//            id = Long.valueOf(clientUserId);
-//        }
-//        otherid = Long.valueOf(userID);
-//        User user = userRepo.findById(id).get();
-//        user.follow(userRepo.findById(otherid).get());
-//        
-//        return "follow";
-//    }
+    @RequestMapping(value = "/users/follow/{userid}", method = {RequestMethod.POST, RequestMethod.GET})
+    public String follow(@PathVariable(value="userid") String userID, @CookieValue("clientUserId") String clientUserId, Model model){
+        long id = 0;
+        long otherid = 0;
+        if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
+            return "redirect:/account";
+        }else{
+            id = Long.valueOf(clientUserId);
+        }
+        otherid = Long.valueOf(userID);
+        User user = userRepo.findById(id).get();
+        user.follow(userRepo.findById(otherid).get());
+        User otherUser = userRepo.findById(otherid).get();
+        
+        model.addAttribute("current",user);
+        model.addAttribute("other", otherUser);
+        
+        return "follow";
+    }
 
     // DELETE "/users/follow/{userid}"
 //    @DeleteMapping("/users/follow/{userid}")
