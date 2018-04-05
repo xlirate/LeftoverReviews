@@ -81,144 +81,69 @@ public class UsersController {
         }
         User curentUser = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
         User user = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
+
+
         model.addAttribute("currentuser", curentUser);
         model.addAttribute("user", user);
+        model.addAttribute("addreviews", user.getWritenReviews());
+        model.addAttribute("canfollow", !curentUser.getFollowedUsers().contains(user));
 
         return "user";
 	}
 
-    @PostMapping("/user")
-    public String showUser(@CookieValue("clientUserId") String clientUserId, @ModelAttribute User user, Model model)
+    @PostMapping("/users/delete/{userid}")
+    public String deleteUser(Model model,
+                             @CookieValue(name = "clientUserId", required = false) String clientUserId,
+                             @RequestParam(name = "userid", required = false) Long userid)
     {
-  	  long id = 0;
-      long otherid = 0;
-      if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
-          return "redirect:/account";
-      }else{
-          id = Long.valueOf(clientUserId);
-      }
-      if(userRepo.findByUsername(user.getUsername()) != null)
-      {
-          return "result";
-      }
-      else
-      {
-    	  return "finderror";
-      }
+        if (clientUserId == null || clientUserId.equals("0") || RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).orElse(null) == null) {
+            return "redirect:/account";
+        }
+        User curentUser = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
+        User user = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
+
+        if(user.equals(curentUser)){
+            RepoManager.getReviewRepository().deleteAll(user.getWritenReviews());
+            RepoManager.getProductRepository().deleteAll(user.getCreatedProducts());
+            user = user.save();
+            RepoManager.getUserRepository().delete(user);
+        }
+
+        return "redirect:/users";
     }
 
-    @GetMapping("/delete")
-    public String deleteUser(@CookieValue("clientUserId") String clientUserId, Model model)
-    {
-    	  long id = 0;
-          long otherid = 0;
-          if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
-              return "redirect:/account";
-          }else{
-              id = Long.valueOf(clientUserId);
-          }
-          User user = new User("");
-          model.addAttribute("user", user);
-          return "delete";
-	}
 
-    @PostMapping("/delete")
-    public String showDelete(@CookieValue("clientUserId") String clientUserId, @ModelAttribute User user, Model model)
+    @PostMapping("/user/follow/{userid}")
+    public String followUser(Model model,
+                             @CookieValue(name = "clientUserId", required = false) String clientUserId,
+                             @RequestParam(name = "userid", required = false) Long userid)
     {
-  	  long id = 0;
-      long otherid = 0;
-      if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
-          return "redirect:/account";
-      }else{
-          id = Long.valueOf(clientUserId);
-      }
-      User deleteUser = userRepo.findByUsername(user.getUsername());
-      if(deleteUser != null)
-      {
-    	  userRepo.delete(deleteUser);
-          return "deleteresult";
-      }
-      else
-      {
-    	  return "finderror";
-      }
+        if (clientUserId == null || clientUserId.equals("0") || RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).orElse(null) == null) {
+            return "redirect:/account";
+        }
+        User curentUser = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
+        User user = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
+
+        curentUser.follow(user);
+        curentUser.save();
+
+        return "redirect:/users/"+user.getId();
     }
 
-    @GetMapping("/follow")
-    public String followUser(@CookieValue("clientUserId") String clientUserId, Model model)
+    @PostMapping("/user/unfollow/{userid}")
+    public String showUnfollow(Model model,
+                               @CookieValue(name = "clientUserId", required = false) String clientUserId,
+                               @RequestParam(name = "userid", required = false) Long userid)
     {
-    	  long id = 0;
-          long otherid = 0;
-          if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
-              return "redirect:/account";
-          }else{
-              id = Long.valueOf(clientUserId);
-          }
-          User user = new User("");
-          model.addAttribute("user", user);
-          return "follow";
-	}
+        if (clientUserId == null || clientUserId.equals("0") || RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).orElse(null) == null) {
+            return "redirect:/account";
+        }
+        User curentUser = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
+        User user = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
 
-    @PostMapping("/follow")
-    public String followUser(@CookieValue("clientUserId") String clientUserId, @ModelAttribute User user, Model model)
-    {
-  	  long id = 0;
-      long otherid = 0;
-      if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
-          return "redirect:/account";
-      }else{
-          id = Long.valueOf(clientUserId);
-      }
-     User currentUser = userRepo.findById(id).get();
-     if(currentUser != null)
-     {
-         currentUser.follow(userRepo.findByUsername(user.getUsername()));
-         currentUser.save();
-         return "followresult";
-     }
-     else
-     {
-   	  return "finderror";
-     }
+        curentUser.unfollow(user);
+        curentUser.save();
 
-    }
-
-    @GetMapping("/unfollow")
-    public String unfollowUser(@CookieValue("clientUserId") String clientUserId, Model model)
-    {
-    	  long id = 0;
-          long otherid = 0;
-          if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
-              return "redirect:/account";
-          }else{
-              id = Long.valueOf(clientUserId);
-          }
-          User user = new User("");
-          model.addAttribute("user", user);
-          return "unfollow";
-	}
-
-    @PostMapping("/unfollow")
-    public String showUnfollow(@CookieValue("clientUserId") String clientUserId, @ModelAttribute User user, Model model)
-    {
-  	  long id = 0;
-      long otherid = 0;
-      if(clientUserId == null || clientUserId == "" || clientUserId == "0") {
-          return "redirect:/account";
-      }else{
-          id = Long.valueOf(clientUserId);
-      }
-      User unfollowUser = userRepo.findByUsername(user.getUsername());
-      User currentUser = userRepo.findById(id).get();
-      if(unfollowUser != null)
-      {
-    	  currentUser.unfollow(unfollowUser);
-    	  currentUser.save();
-          return "unfollowresult";
-      }
-      else
-      {
-    	  return "finderror";
-      }
+        return "redirect:/users/"+user.getId();
     }
 }

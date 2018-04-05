@@ -1,13 +1,34 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Leftover Reviews</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Enter in the username for the user you would like to search for</h1>
-	<form action="#" th:action="@{/user}" th:object="${user}" method="post">
-		<p>Username: <input type="text" th:field="*{username}" /> </p>
-		<p><input type="submit" value="Submit" /></p>
-	</form>
+    <h1><a href="./index.html">Leftover Reviews</a></h1>
+    <hr>
+    <form method="POST" th:if="${user.id.equals(currentuser.id)}" th:action="'/users/delete/' + ${user.id}">
+        <button type="submit" value="Submit">Delete</button>
+    </form>
+    <form method="POST" th:if="${(not user.id.equals(currentuser.id)) and canfollow}" th:action="'/follow/' + ${user.id}">
+        <button type="submit" value="Submit">Follow</button>
+    </form>
+    <form method="POST" th:if="${(not user.id.equals(currentuser.id)) and (not canfollow)}" th:action="'/unfollow/' + ${user.id}">
+        <button type="submit" value="Submit">Unfollow</button>
+    </form>
+    <h1 th:text="${user.username} + '#' + ${user.id}">Kimbo Slice</h1>
+    <p><a th:href="'/products/?user=' + ${user.id}">Products</a></p>
+    <br/>
+    <h2>Product Reviews</h2>
+    <div th:each = "review: ${allreviews}">
+        <div>
+            <a th:href="@{'/products/' + ${review.product.id}}" th:text="@{${review.product.name}"></a>
+            <p th:text="${review.description}"></p>
+            <p th:text="'Score: '${review.score}"></p>
+            <form method="DELETE" th:if="${review.writer.id.equals(currentuser.id)}" th:action="@{'/users/' + ${user.id}}">
+                <button type="submit" value="Submit">Delete</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

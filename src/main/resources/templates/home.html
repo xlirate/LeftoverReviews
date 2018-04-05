@@ -7,7 +7,8 @@
 <body>
 	<h1>Product Review System</h1>
 	<h2>Please choose from one of the following options</h2>
-    <a href="/users">Your account</a></br>
+    <a th:href="'/users/' + ${currentuser.id}">Your account</a></br>
+    <a href="/account">Log out</a></br>
     <a href="/users">See list of current users</a></br>
     <a href="/products">Create a new product</a></br>
 </body>

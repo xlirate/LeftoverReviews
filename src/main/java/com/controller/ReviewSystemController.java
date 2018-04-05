@@ -1,38 +1,32 @@
 package com.controller;
 
-import com.entities.Product;
-import com.entities.ProductRepository;
-import com.entities.User;
-import com.entities.UserRepository;
+import com.entities.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
 public class ReviewSystemController {
 
-    public ProductRepository productRepository;
+    @Autowired
     private UserRepository userRepo;
 
-    @Autowired
-    public ReviewSystemController(ProductRepository productRepository, UserRepository userRepo){
-        this.productRepository = productRepository;
-        this.userRepo = userRepo;
-    }
-    
     @GetMapping("/home")
     public String homeDisplay() {
-        return "home";
+        return "redirect:/";
     }
     
     @GetMapping("/")
-    public String defaultDisplay() {
+    public String defaultDisplay(Model model,
+                                 @CookieValue(name = "clientUserId", required = false) String clientUserId) {
+        if (clientUserId == null || clientUserId.equals("0") || RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).orElse(null) == null) {
+            return "redirect:/account";
+        }
+        User curentUser = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
+        model.addAttribute("currentuser", curentUser);
         return "home";
     }
     
