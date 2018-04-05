@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Enter in the username for the user you would like to follow</h1>
+	<form action="#" th:action="@{/follow}" th:object="${user}" method="post">
+		<p>Username: <input type="text" th:field="*{username}" /> </p>
+		<p><input type="submit" value="Submit" /></p>
+	</form>
+</body>
+</html>
