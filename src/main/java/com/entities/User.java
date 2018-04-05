@@ -53,11 +53,14 @@ public class User {
         }
         product.addReview(r);
         this.writenReviews.add(r);
+        if(this.id != null){
+            product.save();
+        }
         return r;
     }
 
-    public Product createProduct(String url, String description){
-        Product product = new Product(this, url, description);
+    public Product createProduct(String name, String url, String description){
+        Product product = new Product(this, name, url, description);
         if(this.id != null){
             product = product.save();
         }
@@ -147,11 +150,6 @@ public class User {
     public void follow(User other){
         followedUsers.add(other);
     }
-    
-    public void unfollow(User other)
-    {
-    	this.followedUsers.remove(other);
-    }
 
 	public Long getId() {
 		return id;
@@ -192,14 +190,14 @@ public class User {
     }
 
     public Set<Review> getWritenReviews() {
-        return Collections.unmodifiableSet(this.writenReviews);
+        return this.writenReviews;
     }
 
     public Set<Product> getCreatedProducts() {
-        return Collections.unmodifiableSet(this.createdProducts);
+        return this.createdProducts;
     }
 
     public Set<User> getFollowedUsers() {
-        return Collections.unmodifiableSet(this.followedUsers);
+        return this.followedUsers;
     }
 }

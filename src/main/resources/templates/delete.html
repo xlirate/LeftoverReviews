@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Enter in the username for the user you would like to search for</h1>
-	<form action="#" th:action="@{/user}" th:object="${user}" method="post">
+	<h1>Enter in the username for the user you would like to delete</h1>
+	<form action="#" th:action="@{/delete}" th:object="${user}" method="post">
 		<p>Username: <input type="text" th:field="*{username}" /> </p>
 		<p><input type="submit" value="Submit" /></p>
 	</form>

@@ -30,7 +30,7 @@ public class AccountController {
     public String login(HttpServletResponse response, @RequestParam("username") String username, Model model) {
         User u;
 
-        if(username != null && (u = RepoManager.getUserRepository().findByUsername(username)) != null){
+        if((u = RepoManager.getUserRepository().findByUsername(username)) != null){
             Cookie c = new Cookie("clientUserId", u.getId().toString());
             c.setPath("/");
             response.addCookie(c);
@@ -45,7 +45,7 @@ public class AccountController {
     public String register(HttpServletResponse response, @RequestParam("username") String username, Model model) {
         User u;
 
-        if(username != null && (u = new User(username)).hasUniqueName()){
+        if((u = new User(username)).hasUniqueName()){
             u = u.save();
             Cookie c = new Cookie("clientUserId", u.getId().toString());
             c.setPath("/");

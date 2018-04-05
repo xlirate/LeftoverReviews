@@ -31,7 +31,6 @@ public class Review {
         this.writer = writer;
         this.description = description;
         this.score = score;
-
     }
 
     public Product getProduct(){

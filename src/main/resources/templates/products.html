@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Leftover Reviews</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1><a href="./index.html">Leftover Reviews</a></h1>
+    <hr>
+    <h2>Create a Product</h2>
+    <form method="POST" action="./products">
+        <p><input type="text" name="name" value="" placeholder="Product name"></p>
+        <p><textarea name="description" rows="5" cols="30" placeholder="Product description"></textarea></p>
+        <p><input type="text" name="url" value="" placeholder="Product website"></p>
+        <p class="submit"><input type="submit" name="commit" value="Create"></p>
+    </form>
+    <br/>
+    <div id="search">
+            <h2>Search for products</h2>
+            <form method="GET" action="./products">
+                <p><input type="text" name="productnamefrag" value="" placeholder="Search"></p>
+                <select name="ordering">
+                    <option value=""></option>
+                    <option value="jaccard">Jaccard</option>
+                    <option value="bacon">Bacon</option>
+                    <option value="rating">Rating</option>
+                    <option value="followedrating">Rating from Followed</option>
+                </select>
+                <p class="submit"><input type="submit" name="commit" value="Search"></p>
+            </form>
+        </div>
+    <br/>
+    <h2>List of Products</h2>
+    <div th:each = "product: ${allproducts}">
+        <div>
+        <a th:href="@{'/products/' + ${product.id}}" th:text="@{${product.name} + '#' + ${product.id}}"></a>
+        <form method="Post" th:action="@{'/products/delete/' + ${product.id}}">
+            <button type="submit" value="Submit">Delete</button>
+        </form>
+        <a th:href="@{'/products/' + ${product.id}}">
+            <button type="submit" value="Submit">View</button>
+        </a>
+        </div>
+    </div>
+</body>
+</html>
