@@ -113,7 +113,7 @@ public class UsersController {
     }
 
 
-    @PostMapping("/user/follow/{userid}")
+    @PostMapping("/follow/{userid}")
     public String followUser(Model model,
                              @CookieValue(name = "clientUserId", required = false) String clientUserId,
                              @RequestParam(name = "userid", required = false) Long userid)
@@ -130,7 +130,7 @@ public class UsersController {
         return "redirect:/users/"+user.getId();
     }
 
-    @PostMapping("/user/unfollow/{userid}")
+    @PostMapping("/unfollow/{userid}")
     public String showUnfollow(Model model,
                                @CookieValue(name = "clientUserId", required = false) String clientUserId,
                                @RequestParam(name = "userid", required = false) Long userid)

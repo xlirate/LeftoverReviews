@@ -7,9 +7,6 @@
 <body>
     <h1><a href="/">Leftover Reviews</a></h1>
     <hr>
-    <form method="POST" th:if="${product.creator.id.equals(currentuser.id)}" th:action="@{'/products/delete/' + ${product.id}}">
-        <button type="submit" value="Submit">Delete</button>
-    </form>
     <h1 th:text="@{${product.name} + '#' + ${product.id}}">Apple</h1>
     <p><a th:href="'/users/' + ${product.creator.id}" th:text="${product.creator.username}">Placeholder Username</a></p>
     <p th:text="${product.description}">This is a placeholder description<p>
