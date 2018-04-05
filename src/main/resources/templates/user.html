@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h1><a href="./index.html">Leftover Reviews</a></h1>
+    <h1><a href="/">Leftover Reviews</a></h1>
     <hr>
     <form method="POST" th:if="${user.id.equals(currentuser.id)}" th:action="'/users/delete/' + ${user.id}">
         <button type="submit" value="Submit">Delete</button>
