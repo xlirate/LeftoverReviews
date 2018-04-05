@@ -85,7 +85,7 @@ public class UsersController {
 
         model.addAttribute("currentuser", curentUser);
         model.addAttribute("user", user);
-        model.addAttribute("addreviews", user.getWritenReviews());
+        model.addAttribute("allreviews", user.getWritenReviews());
         model.addAttribute("canfollow", !curentUser.getFollowedUsers().contains(user));
 
         return "user";
