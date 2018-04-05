@@ -137,7 +137,7 @@ public class UsersController {
      if(currentUser != null)
      {
          currentUser.follow(userRepo.findByUsername(user.getUsername()));
-        // model.addAttribute("current",currentUser);
+         currentUser.save();
          return "followresult";
      }
      else
@@ -146,7 +146,6 @@ public class UsersController {
      }
      
     }
-
 
     @GetMapping("/unfollow")
     public String unfollowUser(@CookieValue("clientUserId") String clientUserId, Model model)
@@ -178,6 +177,7 @@ public class UsersController {
       if(unfollowUser != null)
       {
     	  currentUser.unfollow(unfollowUser);
+    	  currentUser.save();
           return "unfollowresult";
       }
       else
