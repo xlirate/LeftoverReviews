@@ -51,14 +51,20 @@ public class ReviewSystemController {
     {
     	User user = new User("");
     	model.addAttribute("user", user);
+        //model.addAttribute("message", "");
     	return "user";
     }
     
     @PostMapping("/user")
-    public String userSubmit(@ModelAttribute User user)
+    public String userSubmit(Model model, @ModelAttribute User user)
     {
-    	userRepo.save(user);
-    	return "result";
+        if(user.hasUniqueName()) {
+            userRepo.save(user);
+            return "result";
+        }else{
+            model.addAttribute("message", "That name is already taken!");
+            return "user";
+        }
     }
     
     @GetMapping("/allusers")
