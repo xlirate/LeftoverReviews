@@ -20,14 +20,10 @@ public class UserTest {
     @Autowired
     private RepoManager manager;//this MUST be wired somewhere for the entity classes to work.
 
-    @Before
-    public void clearDb(){
-        RepoManager.clearAll();
-    }
 
     @Test
     public void createProduct() {
-        User jill = new User("Jill").save();
+        User jill = new User("Jillian").save();
         Product apple = jill.createProduct("Apple","apple.com", "Makes phones");
 
         assertTrue(apple.getUrl().equals("apple.com"));
@@ -38,7 +34,7 @@ public class UserTest {
 
     @Test
     public void writeReview() {
-        User tom = new User("Tom").save();
+        User tom = new User("Tomasz").save();
         Product google = tom.createProduct("Google","google.com", "a dns provider");
         Review r = tom.writeReview(google, "ehh..", 1d/2d);
 
@@ -54,7 +50,7 @@ public class UserTest {
     @Test
     public void follow() {
         User alice = new User("Alice").save();
-        User bob = new User("Bob").save();
+        User bob = new User("Robbert").save();
         User eve = new User("Eve").save();
 
         alice.follow(bob);
@@ -69,27 +65,28 @@ public class UserTest {
 
     @Test
     public void jaccardDistance() {
+
         User john = new User("John").save();
         User alice = new User("Alice2").save();
-        User bob = new User("Bob2").save();
+        User bob = new User("Bob4").save();
         User eve = new User("Eve2").save();
 
-        Product a = john.createProduct("a","a.com", "aaa");
-        Product b = john.createProduct("b","b.com", "bbb");
-        Product c = john.createProduct("c","c.com", "ccc");
-        Product d = john.createProduct("d","d.com", "ddd");
+        Product a = john.createProduct("a","a.com", "aaa").save();
+        Product b = john.createProduct("b","b.com", "bbb").save();
+        Product c = eve.createProduct("c","c.com", "ccc").save();
+        Product d = eve.createProduct("d","d.com", "ddd").save();
 
-        alice.writeReview(b, "a", 1d/5d);
-        alice.writeReview(c, "a", 1d/5d);
-        alice.writeReview(d, "a", 1d/5d);
+        alice.writeReview(RepoManager.getProductRepository().findById(b.getId()).get(), "a1", 1d/5d);
+        alice.writeReview(RepoManager.getProductRepository().findById(c.getId()).get(), "a2", 1d/5d);
+        alice.writeReview(RepoManager.getProductRepository().findById(d.getId()).get(), "a3", 1d/5d);
 
-        bob.writeReview(a, "a", 2d/5d);
-        bob.writeReview(c, "a", 2d/5d);
-        bob.writeReview(d, "a", 2d/5d);
+        bob.writeReview(RepoManager.getProductRepository().findById(a.getId()).get(), "a4", 2d/5d);
+        bob.writeReview(RepoManager.getProductRepository().findById(c.getId()).get(), "a5", 2d/5d);
+        bob.writeReview(RepoManager.getProductRepository().findById(d.getId()).get(), "a6", 2d/5d);
 
-        eve.writeReview(a, "a", 4d/5d);
-        eve.writeReview(b, "a", 4d/5d);
-        eve.writeReview(d, "a", 4d/5d);
+        eve.writeReview(RepoManager.getProductRepository().findById(a.getId()).get(), "a7", 4d/5d);
+        eve.writeReview(RepoManager.getProductRepository().findById(b.getId()).get(), "a8", 4d/5d);
+        eve.writeReview(RepoManager.getProductRepository().findById(d.getId()).get(), "a9", 4d/5d);
 
         //instead of specific values, we are testing for relationships
         assertTrue(alice.jaccardDistance(bob) < alice.jaccardDistance(eve));
@@ -125,8 +122,8 @@ public class UserTest {
 
     @Test
     public void usernameUniquenesCallCheck(){
-        User jared = new User("Jared").save();
-        User jared2 = new User("Jared");
+        User jared = new User("Jared4").save();
+        User jared2 = new User("Jared4");
         User curtis = new User("Curtis");
 
         assertTrue(curtis.hasUniqueName());

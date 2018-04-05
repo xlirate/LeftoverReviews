@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 public class Review {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.TABLE)
     private Long id;
 
     @NotNull
@@ -75,9 +75,9 @@ public class Review {
         return id;
     }
 
-    public void update(String description, Double score) {
+    public Review update(String description, Double score) {
         this.description = description;
         this.score = score;
-        this.getRepo().save(this);
+        return this.getRepo().save(this);
     }
 }

@@ -18,11 +18,9 @@ public class SmokeTest {
     @Autowired
     private ProductController productCon;
     @Autowired
-    private ReviewRestController reviewRestCon;
-    @Autowired
     private UsersController usersCon;
     @Autowired
-    private ViewController viewCon;
+    private ReviewSystemController rsCon;
 
     @Test
     public void accountControllerContextLoads() throws Exception {
@@ -35,17 +33,12 @@ public class SmokeTest {
     }
 
     @Test
-    public void reviewRestControllerContextLoads() throws Exception {
-        assertThat(reviewRestCon).isNotNull();
-    }
-
-    @Test
-    public void usersControllerContextLoads() throws Exception {
+    public void userControllerContextLoads() throws Exception {
         assertThat(usersCon).isNotNull();
     }
 
     @Test
-    public void viewControllerContextLoads() throws Exception {
-        assertThat(viewCon).isNotNull();
+    public void reviewSystemControllerContextLoads() throws Exception {
+        assertThat(rsCon).isNotNull();
     }
 }

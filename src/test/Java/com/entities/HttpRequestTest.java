@@ -25,57 +25,28 @@ public class HttpRequestTest {
     @Test
     public void accountDisplayShouldReturnDefaultMessage() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/account",
-                String.class)).contains("account");
-    }
-
-    @Test
-    public void loginDisplayShouldReturnDefaultMessage() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/account/login",
-                String.class)).contains("account");
-    }
-
-    @Test
-    public void registerDisplayShouldReturnDefaultMessage() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/account/register",
-                String.class)).contains("account");
-    }
-
-    @Test
-    public void homeDisplayShouldReturnDefaultMessage() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/home",
-                String.class)).contains("Product Review System");
+                String.class).contains("Login to Account"));
     }
 
     @Test
     public void defaultDisplayShouldReturnDefaultMessage() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
-                String.class)).contains("Product Review System");
+                String.class).contains("Product Review System"));
     }
 
     @Test
     public void productListDisplayShouldReturnDefaultMessage() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products",
-                String.class)).contains("productList");
+                String.class).contains("List of Products"));
     }
-
-    /*@Test
-    public void productDisplayShouldReturnDefaultMessage() throws Exception {
-        User tom = new User("Tom").save();
-        Product google = tom.createProduct("google.com", "A search tool").save();
-
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products/"+google.getId(),
-                String.class)).contains("The product ID is: " + google.getId());
-    }*/
 
     @Test
     public void userDisplayDisplayShouldReturnDefaultMessage() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/user",
-                String.class)).contains("user");
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/user", String.class).contains("Product Reviews"));
     }
 
     @Test
     public void allUserDisplayDisplayShouldReturnDefaultMessage() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/allusers",
-                String.class)).contains("allusers");
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/users", String.class).contains("Search Users"));
     }
 }

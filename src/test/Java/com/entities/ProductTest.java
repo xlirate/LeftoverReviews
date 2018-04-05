@@ -18,11 +18,6 @@ public class ProductTest {
     @Autowired
     private RepoManager manager;//this MUST be wired created somewhere for the entity classes to work.
 
-    @Before
-    public void clearDb(){
-        RepoManager.clearAll();
-    }
-
     @Test
     public void equalsNotFalsePositive() {
         User tom = new User("Tom").save();

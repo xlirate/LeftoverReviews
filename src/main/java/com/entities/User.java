@@ -1,7 +1,5 @@
 package com.entities;
 
-import org.springframework.beans.PropertyValues;
-
 import java.util.*;
 
 import javax.persistence.*;
@@ -41,12 +39,13 @@ public class User {
 	}
 
     public Review writeReview(Product product, String description, Double score){
-        for(Review old : this.writenReviews){
-            if(old.getProduct().equals(product)){
-                old.update(description, score);
-                return old;
+
+        for(Review r : this.getWritenReviews()){
+            if(r.getProduct().equals(product)){
+                return r.update(description,score);
             }
         }
+
         Review r = new Review(product, this, description, score);
         if(this.id != null){
             r = r.save();

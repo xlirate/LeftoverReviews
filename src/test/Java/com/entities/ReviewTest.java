@@ -1,7 +1,6 @@
 package com.entities;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +16,6 @@ public class ReviewTest {
     @Autowired
     private RepoManager manager;//this MUST be wired created somewhere for the entity classes to work.
 
-    @Before
-    public void clearDb(){
-        RepoManager.clearAll();
-    }
-
     @Test
     public void overridingOldReviewsWithNewOnes(){
         User josh = new User("Josh").save();
@@ -36,18 +30,6 @@ public class ReviewTest {
         assertTrue(r.getDescription().equals("cold"));
     }
 
-    @Test
-    public void equalsNotFalsePositive() {
-        User tom = new User("Tom").save();
-        User jerry = new User("Jerry").save();
-        Product google = tom.createProduct("Google","google.com", "A search tool");
-        Review good = tom.writeReview(google, "ok",4d/5d);
-        Review bad = jerry.writeReview(google, "crap",1d/5d);
-
-        System.out.println(good.getId());
-        System.out.println(bad.getId());
-        assertFalse(good.equals(bad));
-    }
 
     @Test
     public void equalsNotFalseNegative() {

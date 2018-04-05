@@ -10,7 +10,7 @@ import java.util.Set;
 public class Product {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.TABLE)
     private Long id;
 
     @NotNull
@@ -26,7 +26,7 @@ public class Product {
     @NotNull
     private String name;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
 
     private Product(){}
