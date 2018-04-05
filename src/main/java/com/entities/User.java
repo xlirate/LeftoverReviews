@@ -204,4 +204,9 @@ public class User {
     public Set<User> getFollowedUsers() {
         return this.followedUsers;
     }
+
+
+	public void unfollow(User unfollowUser) {
+		this.followedUsers.remove(unfollowUser);		
+	}
 }
