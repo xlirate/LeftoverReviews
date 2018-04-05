@@ -16,7 +16,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/UsersController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-601">
-              <caret line="32" column="9" lean-forward="true" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
+              <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -25,8 +25,8 @@
       <file leaf-file-name="HttpRequestTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/Java/com/entities/HttpRequestTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="60" column="9" lean-forward="true" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
+            <state relative-caret-position="242">
+              <caret line="61" column="56" lean-forward="false" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -62,8 +62,8 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/Java/com/entities/ApplicationTest.java" />
         <option value="$PROJECT_DIR$/src/test/Java/com/entities/SmokeTest.java" />
-        <option value="$PROJECT_DIR$/src/test/Java/com/entities/HttpRequestTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/controller/UsersController.java" />
+        <option value="$PROJECT_DIR$/src/test/Java/com/entities/HttpRequestTest.java" />
       </list>
     </option>
   </component>
@@ -80,8 +80,8 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="436" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="357" />
     <option name="width" value="1083" />
     <option name="height" value="900" />
   </component>
@@ -223,7 +223,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.HttpRequestTest.productDisplayShouldReturnDefaultMessage">
+  <component name="RunManager" selected="JUnit.All in LeftoverReviews">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -462,19 +462,19 @@
       <option name="presentableId" value="Default" />
       <updated>1522899656433</updated>
       <workItem from="1522899657787" duration="5079000" />
-      <workItem from="1522905303499" duration="2787000" />
+      <workItem from="1522905303499" duration="3803000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
+    <history-entry file="All_in_LeftoverReviews - 2018.04.05 at 02h 09m 55s.xml">
+      <configuration name="All in LeftoverReviews" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_LeftoverReviews - 2018.04.05 at 02h 30m 04s.xml">
+      <configuration name="All in LeftoverReviews" configurationId="JUnit" />
+    </history-entry>
     <history-entry file="HttpRequestTest - 2018.04.05 at 01h 28m 13s.xml">
       <configuration name="HttpRequestTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="HttpRequestTest_homeDisplayShouldReturnDefaultMessage - 2018.04.05 at 00h 26m 14s.xml">
-      <configuration name="HttpRequestTest.homeDisplayShouldReturnDefaultMessage" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="HttpRequestTest_homeDisplayShouldReturnDefaultMessage - 2018.04.05 at 00h 27m 08s.xml">
-      <configuration name="HttpRequestTest.homeDisplayShouldReturnDefaultMessage" configurationId="JUnit" />
     </history-entry>
     <history-entry file="HttpRequestTest_homeDisplayShouldReturnDefaultMessage - 2018.04.05 at 00h 28m 40s.xml">
       <configuration name="HttpRequestTest.homeDisplayShouldReturnDefaultMessage" configurationId="JUnit" />
@@ -499,10 +499,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7866000" />
+    <option name="totallyTimeSpent" value="8882000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="436" y="0" width="1083" height="900" extended-state="1" />
+    <frame x="357" y="0" width="1083" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -680,7 +680,7 @@
         <state relative-caret-position="255">
           <caret line="17" column="14" lean-forward="false" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -762,8 +762,8 @@
         <state relative-caret-position="165">
           <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="e#1027#1028#0" expanded="true" />
-            <element signature="e#1086#1087#0" expanded="true" />
+            <element signature="e#1027#1028#0" expanded="false" />
+            <element signature="e#1086#1087#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -771,15 +771,15 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/UsersController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-601">
-          <caret line="32" column="9" lean-forward="true" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
+          <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/Java/com/entities/HttpRequestTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="60" column="9" lean-forward="true" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
+        <state relative-caret-position="242">
+          <caret line="61" column="56" lean-forward="false" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

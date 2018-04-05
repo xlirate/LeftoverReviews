@@ -63,7 +63,7 @@ public class HttpRequestTest {
         User tom = new User("Tom").save();
         Product google = tom.createProduct("google.com", "A search tool").save();
 
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products/{"+google.getId()+"}",
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products/"+google.getId(),
                 String.class)).contains("The product ID is: " + google.getId());
     }
 
