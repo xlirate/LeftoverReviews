@@ -15,14 +15,6 @@ import com.entities.UserRepository;
 @Controller
 public class UsersController {
 
-
-    private UserRepository userRepo;
-
-    @Autowired
-    public UsersController(UserRepository userRepo){
-	        this.userRepo = userRepo;
-	    }
-
     //GET "/users?[usernamefrag={frag}]&[ordering={jaccard|bacon}]"
     @GetMapping("/users")
     public String getUsersList(Model model,
@@ -35,7 +27,7 @@ public class UsersController {
         User curentUser = RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).get();
 
         List<User> allUsers = new ArrayList<>();
-        for (User u : userRepo.findAll()) {
+        for (User u : RepoManager.getUserRepository().findAll()) {
             allUsers.add(u);
         }
 
@@ -72,10 +64,9 @@ public class UsersController {
     }
 
 
-    @GetMapping("/users/{userid}")
+    @GetMapping("/user")
     public String getUser(Model model,
-                          @CookieValue(name = "clientUserId", required = false) String clientUserId,
-                          @RequestParam(name = "userid", required = false) Long userid) {
+                          @CookieValue(name = "clientUserId", required = false) String clientUserId) {
         if (clientUserId == null || clientUserId.equals("0") || RepoManager.getUserRepository().findById(Long.valueOf(clientUserId)).orElse(null) == null) {
             return "redirect:/account";
         }
@@ -97,7 +88,7 @@ public class UsersController {
       }else{
           id = Long.valueOf(clientUserId);
       }
-      if(userRepo.findByUsername(user.getUsername()) != null)
+      if(RepoManager.getUserRepository().findByUsername(user.getUsername()) != null)
       {
           return "result";
       }
@@ -132,10 +123,10 @@ public class UsersController {
       }else{
           id = Long.valueOf(clientUserId);
       }
-      User deleteUser = userRepo.findByUsername(user.getUsername());
+      User deleteUser = RepoManager.getUserRepository().findByUsername(user.getUsername());
       if(deleteUser != null)
       {
-    	  userRepo.delete(deleteUser);
+    	  RepoManager.getUserRepository().delete(deleteUser);
           return "deleteresult";
       }
       else
@@ -169,10 +160,10 @@ public class UsersController {
       }else{
           id = Long.valueOf(clientUserId);
       }
-     User currentUser = userRepo.findById(id).get();
+     User currentUser = RepoManager.getUserRepository().findById(id).get();
      if(currentUser != null)
      {
-         currentUser.follow(userRepo.findByUsername(user.getUsername()));
+         currentUser.follow(RepoManager.getUserRepository().findByUsername(user.getUsername()));
          currentUser.save();
          return "followresult";
      }
@@ -208,8 +199,8 @@ public class UsersController {
       }else{
           id = Long.valueOf(clientUserId);
       }
-      User unfollowUser = userRepo.findByUsername(user.getUsername());
-      User currentUser = userRepo.findById(id).get();
+      User unfollowUser = RepoManager.getUserRepository().findByUsername(user.getUsername());
+      User currentUser = RepoManager.getUserRepository().findById(id).get();
       if(unfollowUser != null)
       {
     	  currentUser.unfollow(unfollowUser);
